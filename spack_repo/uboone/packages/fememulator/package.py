@@ -22,5 +22,19 @@ class Fememulator(CMakePackage):
     depends_on("cmake@2.8:", type="build")
     depends_on("cxx", type="build")
 
+    variant(
+        "cxxstd",
+        default="17",
+        values=("14", "17", "20"),
+        multi=False,
+        description="Use the specified C++ standard when building.",
+    )
+
+    def cmake_args(self):
+        args = [
+            self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
+        ] 
+        return args
+
     def url_for_version(self, version):
         return f"https://github.com/uboone/fememulator/archive/refs/tags/v{str(version).replace('.', '_')}.tar.gz"

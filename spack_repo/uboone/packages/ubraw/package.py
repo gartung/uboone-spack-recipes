@@ -22,6 +22,8 @@ class Ubraw(CMakePackage):
     depends_on("cmake@3.20:", type="build")
     depends_on("cxx", type="build")
     depends_on("cetmodules", type="build")
+    depends_on("nufinder", type="build")
+    depends_on("larfinder", type="build")
 
     depends_on("art", type=("build", "link", "run"))
     depends_on("art-root-io", type=("build", "link", "run"))
@@ -41,6 +43,22 @@ class Ubraw(CMakePackage):
     depends_on("sqlite", type=("build", "link", "run"))
     depends_on("ubcore", type=("build", "link", "run"))
     depends_on("uboonedaq-datatypes", type=("build", "link", "run"))
+
+    variant(
+        "cxxstd",
+        default="17",
+        values=("14", "17", "20"),
+        multi=False,
+        description="Use the specified C++ standard when building.",
+    )
+
+    def cmake_args(self):
+        args = [
+            self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
+            self.define("CMAKE_MODULE_PATH", "%s/Modules;%s/Modules" %
+                       (self.spec['nufinder'].prefix, self.spec['larfinder'].prefix)),
+        ] 
+        return args
 
     def url_for_version(self, version):
         return f"https://github.com/uboone/ubraw/archive/refs/tags/v{str(version).replace('.', '_')}.tar.gz"
