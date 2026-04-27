@@ -47,11 +47,13 @@ class Ubreco(CMakePackage):
                 "ubreco/MichelReco/Algo/ConeHitFinder.cxx"
                 ]
         filter_file("isnan", "std::isnan", *files)
+        filter_file("cet_cmake_env\(\)",
+                'cet_cmake_env()\nset(ubreco_FW_DIR, "scripts")',
+                "CMakeLists.txt")
 
     def cmake_args(self):
         args = [
             self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
-            self.define("ubreco_FW_DIR", "scripts"),
             self.define("CMAKE_MODULE_PATH", "%s/Modules;%s/Modules" %
                        (self.spec['nufinder'].prefix, self.spec['larfinder'].prefix)),
         ] 
