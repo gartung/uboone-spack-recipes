@@ -7,7 +7,7 @@ from spack_repo.builtin.build_systems.makefile import MakefilePackage
 from spack.package import *
 
 
-class Larcv(MakefilePackage):
+class Larcv(Package):
     """Liquid Argon Computer Vision data format and image processing framework."""
 
     homepage = "https://github.com/LArbys/LArCV"
@@ -19,7 +19,9 @@ class Larcv(MakefilePackage):
     version("develop", branch="ubdl_dev")
     version("2.me.06.03.prod.01", commit="0c0c1f90497e64e697f2cbf01ffba9f34da9cada")
 
+    depends_on("c", type="build")
     depends_on("cxx", type="build")
+    depends_on("cmake", type="build")
     depends_on("gmake", type="build")
     depends_on("python", type=("build", "run"))
     depends_on("root", type=("build", "link", "run"))
@@ -68,6 +70,7 @@ class Larcv(MakefilePackage):
         configure = Executable('%s/configure.sh' % self.stage.source_path)
         configure()
         with working_dir(join_path(self.stage.source_path, 'build')):
+            cmake = Executable('cmake')
             cmake('-DUSE_PYTHON3=ON' '../')
             make()
 
