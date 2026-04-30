@@ -10,14 +10,14 @@ from spack.package import *
 class Larcv(MakefilePackage):
     """Liquid Argon Computer Vision data format and image processing framework."""
 
-    homepage = "https://github.com/uboone/LArCV"
-    url = "https://github.com/uboone/LArCV/archive/refs/tags/v06_71_00c.tar.gz"
-    git = "https://github.com/uboone/LArCV.git"
+    homepage = "https://github.com/LArbys/LArCV"
+    url = "https://github.com/LArbys/LArCV/archive/refs/tags/v06_71_00c.tar.gz"
+    git = "https://github.com/LArbys/LArCV.git"
 
     license("UNKNOWN")
 
-    version("develop", branch="develop")
-    version("06.71.00c", sha256="3694afa0c2320360d40a6a65f7f05f2cb0dfae276ab05b5f2c167fd8dc59f766")
+    version("develop", branch="ubdl_dev")
+    version("2.me.06.03.prod.01", commit="0c0c1f90497e64e697f2cbf01ffba9f34da9cada")
 
     depends_on("cxx", type="build")
     depends_on("gmake", type="build")
@@ -54,7 +54,11 @@ class Larcv(MakefilePackage):
         env.prepend_path("PATH", join_path(self.stage.source_path, "bin"))
 
     def build(self, spec, prefix):
-        make()
+        set_executable(join_path(self.stage.source_path, 'configure.sh'))
+        configure = Executable(join_path(self.stage.source_path, '/configure.sh'))
+        configure()
+        with working_dir(join_path(self.stage.source_path, '%s/build')):
+            make()
 
     def install(self, spec, prefix):
         install_tree(self.stage.source_path, prefix)
