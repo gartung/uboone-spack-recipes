@@ -52,6 +52,9 @@ class Larcv(MakefilePackage):
         env.set("BOOST_INC", self.spec["boost"].prefix.include)
         env.set("BOOST_LIB", self.spec["boost"].prefix.lib)
 
+        env.set("OPENCV_INC", self.spec["opencv"].prefix.include)
+        env.set("OPENCV_LIB", self.spec["opencv"].prefix.lib)
+
         env.prepend_path("PATH", self.spec["root"].prefix.bin)
         env.prepend_path("PATH", self.spec["python"].prefix.bin)
 
@@ -64,7 +67,8 @@ class Larcv(MakefilePackage):
         set_executable(join_path(self.stage.source_path, 'configure.sh'))
         configure = Executable('%s/configure.sh' % self.stage.source_path)
         configure()
-        with working_dir(join_path(self.stage.source_path, '%s/build')):
+        with working_dir(join_path(self.stage.source_path, 'build')):
+            cmake('-DUSE_PYTHON3=ON' '../')
             make()
 
     def install(self, spec, prefix):
@@ -84,5 +88,3 @@ class Larcv(MakefilePackage):
         env.prepend_path("PYTHONPATH", join_path(self.prefix, "python"))
         env.prepend_path("LD_LIBRARY_PATH", join_path(self.prefix, "build", "lib"))
 
-    def url_for_version(self, version):
-        return f"https://github.com/uboone/LArCV/archive/refs/tags/v{str(version).replace('.', '_')}.tar.gz"
