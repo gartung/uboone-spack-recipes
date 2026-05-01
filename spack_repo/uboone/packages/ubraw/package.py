@@ -21,6 +21,7 @@ class Ubraw(CMakePackage, FnalGithubPackage):
     version("10.20.02", sha256="85647ddeedbe3ff444ca1477606d42f0823068312c05bb6126d2087202382a09")
 
     depends_on("cmake@3.20:", type="build")
+    depends_on("c", type="build")
     depends_on("cxx", type="build")
     depends_on("cetmodules", type="build")
     depends_on("nufinder", type="build")

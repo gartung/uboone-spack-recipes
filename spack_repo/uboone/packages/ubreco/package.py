@@ -21,6 +21,7 @@ class Ubreco(CMakePackage, FnalGithubPackage):
     version("10.20.05", sha256="b27408373a425582cae082ab43a1a66e343a8dc95ef188689935c002581e6366")
 
     depends_on("cmake@3.20:", type="build")
+    depends_on("c", type="build")
     depends_on("cxx", type="build")
     depends_on("cetmodules", type="build")
     depends_on("nufinder", type="build")

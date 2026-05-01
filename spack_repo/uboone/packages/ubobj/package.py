@@ -17,6 +17,7 @@ class Ubobj(CMakePackage, FnalGithubPackage):
     version("10.16.00", sha256="b95ab4ceea7592dd318f19087cad3d0d997fd41fd05b18c6c3c07715ecd70db3")
 
     depends_on("cmake@3.20:", type="build")
+    depends_on("c", type="build")
     depends_on("cxx", type="build")
     depends_on("cetmodules", type="build")
     depends_on("nufinder", type="build")

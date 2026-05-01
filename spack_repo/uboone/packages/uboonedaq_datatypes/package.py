@@ -24,6 +24,7 @@ class UboonedaqDatatypes(CMakePackage, FnalGithubPackage):
     depends_on("cetmodules", type="build")
     depends_on("nufinder", type="build")
     depends_on("larfinder", type="build")
+    depends_on("c", type="build")
     depends_on("cxx", type="build")
     depends_on("boost", type=("build", "link", "run"))
     depends_on("openssl", type=("build", "link", "run"))

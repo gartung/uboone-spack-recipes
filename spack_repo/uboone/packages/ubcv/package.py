@@ -21,6 +21,7 @@ class Ubcv(CMakePackage, FnalGithubPackage):
     version("10.20.05", sha256="eed26a67ae6586f555d47ffad2710176c844c4532c1ef5af4ca4b98a2a3f2920")
 
     depends_on("cmake@3.20:", type="build")
+    depends_on("c", type="build")
     depends_on("cxx", type="build")
     depends_on("cetmodules", type="build")
     depends_on("nufinder", type="build")

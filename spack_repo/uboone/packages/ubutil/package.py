@@ -16,6 +16,7 @@ class Ubutil(CMakePackage):
     version("10.20.04", sha256="ea090d871168bd3dfd45f821360715c13a8ede245e40e4e390b00f7758de2db1")
 
     depends_on("cmake@3.20:", type="build")
+    depends_on("c", type="build")
     depends_on("cxx", type="build")
     depends_on("cetmodules", type="build")
     depends_on("nufinder", type="build")

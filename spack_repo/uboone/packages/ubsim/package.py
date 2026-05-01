@@ -21,6 +21,7 @@ class Ubsim(CMakePackage, FnalGithubPackage):
     version("10.20.05", sha256="07eed80f5e28b44decc30a402300a2f6af8d4328a36335ef2c89208dfc3201d3")
 
     depends_on("cmake@3.20:", type="build")
+    depends_on("c", type="build")
     depends_on("cxx", type="build")
     depends_on("cetmodules", type="build")
     depends_on("nufinder", type="build")

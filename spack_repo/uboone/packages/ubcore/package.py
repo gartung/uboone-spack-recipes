@@ -21,6 +21,7 @@ class Ubcore(CMakePackage, FnalGithubPackage):
     version("10.20.02", sha256="9350fcf4ee886d4c5f241ef0daa79689bc8188a1d13fd77283e6c6965c5f1fd1")
 
     depends_on("cmake@3.20:", type="build")
+    depends_on("c", type="build")
     depends_on("cxx", type="build")
     depends_on("cetmodules", type="build")
     depends_on("nufinder", type="build")

@@ -21,6 +21,7 @@ class Ubcrt(CMakePackage, FnalGithubPackage):
     version("10.20.05", sha256="60f7c858a5d24964cebd6def29547fe8b8a2fd41d627cb5b0f2f219bd8cfc95a")
 
     depends_on("cmake@3.20:", type="build")
+    depends_on("c", type="build")
     depends_on("cxx", type="build")
     depends_on("cetmodules", type="build")
     depends_on("nufinder", type="build")

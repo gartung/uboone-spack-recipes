@@ -20,6 +20,7 @@ class Larlite(MakefilePackage):
     version("trunk", branch="trunk")
     version("06.71.00a", sha256="0099f77a99941c72b72d0d0fb69984ebbd0e444fa2cc631679a6ab8d0102e4b4")
 
+    depends_on("c", type="build")
     depends_on("cxx", type="build")
     depends_on("gmake", type="build")
     depends_on("python", type=("build", "run"))

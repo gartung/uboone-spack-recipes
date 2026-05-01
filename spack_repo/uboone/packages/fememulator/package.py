@@ -21,6 +21,7 @@ class Fememulator(CMakePackage):
     version("02.03.00", sha256="47be2db01c26f7fb0af790bfed674b4b6e79f3b7f84b2b7327692358f3860668")
 
     depends_on("cmake@2.8:", type="build")
+    depends_on("c", type="build")
     depends_on("cxx", type="build")
 
     variant(

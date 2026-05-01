@@ -21,6 +21,7 @@ class Ubevt(CMakePackage, FnalGithubPackage):
     version("10.20.02", sha256="64b19bd32a34a0fd81ac0f62cd679333cd261d239a810f9d9ff59731c2c748fc")
 
     depends_on("cmake@3.20:", type="build")
+    depends_on("c", type="build")
     depends_on("cxx", type="build")
     depends_on("cetmodules", type="build")
     depends_on("nufinder", type="build")
