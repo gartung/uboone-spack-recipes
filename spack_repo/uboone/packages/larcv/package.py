@@ -72,7 +72,7 @@ class Larcv(Package):
         mkdirp(join_path(self.stage.source_path, "build", "bin"))
         mkdirp(join_path(self.stage.source_path, "build", "include"))
         env.prepend_path("PATH", join_path(self.stage.source_path, "bin"))
-
+        import os
         if os.path.exists(self.spec["py-torch"].prefix.lib64):
             spack_env.set("LIBTORCH_DIR", join_path(
                     self.spec["py-torch"].prefix.lib64,
