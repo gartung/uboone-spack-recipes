@@ -36,13 +36,13 @@ class Geo2d(Package):
         env.set("GEO2D_BINDIR", join_path(self.stage.source_path, "bin"))
         env.set("GEO2D_COREDIR", join_path(self.stage.source_path, "Geo2D", "core"))
 
-        env.set("GEO2D_CXX", self.compiler.cxx)
+        env.set("GEO2D_CXX", "c++")
         env.set("GEO2D_ROOT6", "1")
         env.set("GEO2D_PYTHON_VERSION", "3")
         env.set("GEO2D_PYTHON", "python3")
 
-        env.set("OPENCV_INCDIR", join_path(self.spec["opencv"].prefix.include, "opencv4"))
-        env.set("OPENCV_LIBDIR", self.spec["opencv"].prefix.lib)
+        env.set("OPENCV_INCDIR", (self.spec["opencv"].prefix.include)
+        env.set("OPENCV_LIBDIR", self.spec["opencv"].prefix.lib64)
 
         env.prepend_path("PATH", self.spec["root"].prefix.bin)
         env.prepend_path("PATH", self.spec["python"].prefix.bin)
