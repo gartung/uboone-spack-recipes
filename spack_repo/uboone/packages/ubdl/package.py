@@ -22,6 +22,8 @@ class Ubdl(MakefilePackage):
 
     depends_on("c", type="build")
     depends_on("cxx", type="build")
+    depends_on("gmake", type="build")
+    depends_on("cmake", type="build")
     depends_on("python", type=("build", "run"))
     depends_on("root", type=("build", "link", "run"))
     depends_on("boost", type=("build", "link", "run"))
@@ -32,12 +34,14 @@ class Ubdl(MakefilePackage):
     depends_on("py-scipy", type=("build", "run"))
     depends_on("py-pyyaml", type=("build", "run"))
     depends_on("py-pyzmq", type=("build", "run"))
-    depends_on("larlite@2.me.06.03.prod.01", type=("build", "link", "run"))
-    depends_on("larcv@2.me.06.03.prod.01", type=("build", "link", "run"))
 
+    def patch(self):
+        filter_file('setup cmake v3_27_4', '', 'buildall_fnal_py3.sh')
+
+        
     def build(self, spec, prefix):
-        set_executable('%s/buildall_fnal.sh' % self.stage.source_path)
-        build_script = Executable('%s/buildall_fnal.sh' % self.stage.source_path)
+        set_executable('%s/buildall_fnal_py3.sh' % self.stage.source_path)
+        build_script = Executable('%s/buildall_fnal_py3.sh' % self.stage.source_path)
         build_script()
 
     def install(self, spec, prefix):
