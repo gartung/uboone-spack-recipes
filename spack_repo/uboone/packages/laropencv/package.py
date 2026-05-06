@@ -56,7 +56,8 @@ class Laropencv(Package):
         mkdirp(join_path(base, "lib"))
 
     def build(self, spec, prefix):
-        make()
+        #make()
+        pass
 
     def install(self, spec, prefix):
         install_tree(self.stage.source_path, prefix)
