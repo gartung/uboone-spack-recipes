@@ -46,8 +46,7 @@ class Ubana(CMakePackage, FnalGithubPackage):
         args = [
             self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
             self.define("CMAKE_MODULE_PATH", "%s/Modules;%s/Modules" %
-                       (self.spec['nufinder'].prefix, self.spec['larfinder'].prefix)),
-            '--presets', 'default',
+                       (self.spec['nufinder'].prefix, self.spec['larfinder'].prefix))
         ] 
         return args
 
