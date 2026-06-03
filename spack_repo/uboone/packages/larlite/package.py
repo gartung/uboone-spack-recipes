@@ -65,6 +65,13 @@ class Larlite(Package):
     def install(self, spec, prefix):
         install_tree(self.stage.source_path, prefix)
 
+    @run_after("install")
+    def rename_makefile_dir(self):
+        os.rename(
+            join_path(self.spec.prefix, "Makefile"),
+            join_path(self.spec.prefix, "Makefile.%s" % self.spec.name),
+        )
+
     def setup_run_environment(self, env):
         env.set("LARLITE_BASEDIR", self.prefix)
         env.set("LARLITE_LIBDIR", join_path(self.prefix, "lib"))
