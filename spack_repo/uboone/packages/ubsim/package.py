@@ -18,6 +18,7 @@ class Ubsim(CMakePackage, FnalGithubPackage):
     license("Apache-2.0")
 
     version("develop", branch="develop")
+    version("10.21.00", sha256="a14e61746188f9dca6892a9c4ce27f9d1d6af640e75dd0c2ee1f0b4c0c8e78e5") 
     version("10.20.05", sha256="07eed80f5e28b44decc30a402300a2f6af8d4328a36335ef2c89208dfc3201d3")
 
     depends_on("cmake@3.20:", type="build")

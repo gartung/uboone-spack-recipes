@@ -14,6 +14,7 @@ class Ubobj(CMakePackage, FnalGithubPackage):
     license("Apache-2.0")
 
     version("develop", branch="develop")
+    version("10.20.07", sha256="ed8385113e6bd8c5a01f4a9e1fb0eb2737a76a3d8049864b0daeceb061d72e59") 
     version("10.16.00", sha256="b95ab4ceea7592dd318f19087cad3d0d997fd41fd05b18c6c3c07715ecd70db3")
 
     depends_on("cmake@3.20:", type="build")

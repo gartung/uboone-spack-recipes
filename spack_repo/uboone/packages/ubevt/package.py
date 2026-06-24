@@ -18,6 +18,7 @@ class Ubevt(CMakePackage, FnalGithubPackage):
     license("Apache-2.0")
 
     version("develop", branch="develop")
+    version("10.20.07", sha256="eb991f8b460f16f52262b04e441db8be0820f66b22be20b382158fe97a96944d") 
     version("10.20.02", sha256="64b19bd32a34a0fd81ac0f62cd679333cd261d239a810f9d9ff59731c2c748fc")
 
     depends_on("cmake@3.20:", type="build")
