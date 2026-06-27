@@ -18,6 +18,7 @@ class Uboonecode(CMakePackage, FnalGithubPackage):
     license("Apache-2.0")
 
     version("develop", branch="develop")
+    version("10.21.00", sha256="bf144e83d783c99665588bd7677b5a5d827563747940f58b0f2eb9fceaaa9817") 
     version("10.20.05", sha256="8941ddb191c5e3895a283e5f4f729cbbb07d3a7eb053ef13e1e24b16228c6cea")
 
     depends_on("cmake@3.20:", type="build")

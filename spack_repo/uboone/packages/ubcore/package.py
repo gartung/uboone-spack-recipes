@@ -18,6 +18,7 @@ class Ubcore(CMakePackage, FnalGithubPackage):
     license("Apache-2.0")
 
     version("develop", branch="develop")
+    version("10.20.07", sha256="5a51fd78526a46998f56e29e315e8a5a927f7fdfab83300ed2dd539087fe7adb") 
     version("10.20.02", sha256="9350fcf4ee886d4c5f241ef0daa79689bc8188a1d13fd77283e6c6965c5f1fd1")
 
     depends_on("cmake@3.20:", type="build")

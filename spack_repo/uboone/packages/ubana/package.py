@@ -18,6 +18,7 @@ class Ubana(CMakePackage, FnalGithubPackage):
     license("Apache-2.0")
 
     version("develop", branch="develop")
+    version("10.21.00", sha256="a3057c526794f6e2c691fcb663b2ba3f37dd99e4c8730a622a89e13d9d70588b") 
     version("10.20.05", sha256="019e329075b3c8d5616cf3ce1d84ff663a4441ed42240066459612c2dd655e6e")
 
     depends_on("cmake@3.20:", type="build")
