@@ -2,11 +2,33 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+import sys, os
+
 from spack_repo.builtin.build_systems.cmake import CMakePackage
 
 from spack.package import *
 
 from spack_repo.fnal_art.packages.fnal_github_package.package import *
+
+def sanitize(env):
+    for var in (
+        "PATH",
+        "MANPATH",
+        "ACLOCAL_PATH",
+        "PKG_CONFIG_PATH",
+        "PYTHONPATH",
+        "C_INCLUDE_PATH",
+        "CPLUS_INCLUDE_PATH",
+        "CPATH",
+        "ROOT_INCLUDE_PATH",
+        "ROOT_LIBRARY_PATH",
+        "CET_PLUGIN_PATH",
+        "SPACK_LOADED_HASHES",
+        "XLOCALEDIR",
+        "WIRECELL_PATH",
+        "FW_SEARCH_PATH"
+    ):
+        env.prune_duplicate_paths(var)
 
 class Uboonecode(CMakePackage, FnalGithubPackage):
     """MicroBooNE top-level configuration and FHiCL tools package."""
@@ -29,12 +51,13 @@ class Uboonecode(CMakePackage, FnalGithubPackage):
     depends_on("larfinder", type="build")
 
     depends_on("genie", type=("build", "link", "run"))
-    depends_on("lardata", type=("build", "link", "run"))
+    depends_on("larsoft", type=("build", "link", "run"))
     depends_on("nugen", type=("build", "link", "run"))
     depends_on("nurandom", type=("build", "link", "run"))
     depends_on("ubcrt", type=("build", "link", "run"))
     depends_on("ubcv", type=("build", "link", "run"))
     depends_on("ublite", type=("build", "link", "run"))
+    depends_on("uboonedata", type=("build", "run"))
 
     variant(
         "cxxstd",
@@ -56,3 +79,12 @@ class Uboonecode(CMakePackage, FnalGithubPackage):
 
     def url_for_version(self, version):
         return f"https://github.com/uboone/uboonecode/archive/refs/tags/v{str(version).replace('.', '_')}.tar.gz"
+
+    def setup_run_environment(self, env):
+        print("Setting up uboonecode run environment.", file=sys.stderr)
+        
+        env.prepend_path("WIRECELL_PATH", os.path.join(self.spec['wire-cell-toolkit'].prefix, "share/wirecell"))
+        
+        sanitize(env)
+
+

@@ -1,7 +1,6 @@
+import sys, os
 from spack_repo.builtin.build_systems.cmake import CMakePackage
-
 from spack.package import *
-
 from spack_repo.fnal_art.packages.fnal_github_package.package import *
 
 class Uboonedata(CMakePackage):
@@ -18,6 +17,7 @@ class Uboonedata(CMakePackage):
 
     depends_on("cmake@3.20:", type="build")
     depends_on("cetmodules", type="build")
+    depends_on("uboone-photon-propagation", type=("build", "run"))
 
     @cmake_preset
     def cmake_args(self):
@@ -27,3 +27,20 @@ class Uboonedata(CMakePackage):
     def url_for_version(self, version):
         return f"https://github.com/uboone/ubooonedata/archive/refs/tags/v{str(version).replace('.', '_')}.tar.gz"
 
+    def setup_run_environment(self, env):
+        print("Setting up uboonedata run environment.", file=sys.stderr)
+
+        env.prepend_path("WIRECELL_PATH", os.path.join(self.prefix, "WireCellData"))
+        env.prepend_path("GXMLPATH", os.path.join(self.prefix, "genie"))
+        env.prepend_path("FW_SEARCH_PATH", os.path.join(self.prefix, "Response"))
+        env.prepend_path("FW_SEARCH_PATH", os.path.join(self.prefix, "Calibration"))
+        env.prepend_path("FW_SEARCH_PATH", os.path.join(self.prefix, "CRT"))
+        env.prepend_path("FW_SEARCH_PATH", os.path.join(self.prefix, "PandoraData"))
+        env.prepend_path("FW_SEARCH_PATH", os.path.join(self.prefix, "ppfx"))
+        env.prepend_path("FW_SEARCH_PATH", os.path.join(self.prefix, "SinglePhotonAnalysis"))
+        env.prepend_path("FW_SEARCH_PATH", os.path.join(self.prefix, "searchingfornues"))
+        env.prepend_path("FW_SEARCH_PATH", os.path.join(self.prefix, "Eventgenerator/TwoBodyDecayGen"))
+
+        env.prune_duplicate_paths("WIRECELL_PATH")
+        env.prune_duplicate_paths("GXMLPATH")
+        env.prune_duplicate_paths("FW_SEARCH_PATH")
