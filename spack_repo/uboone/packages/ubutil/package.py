@@ -1,5 +1,5 @@
+import sys, os
 from spack_repo.builtin.build_systems.cmake import CMakePackage
-
 from spack.package import *
 
 
@@ -47,3 +47,14 @@ class Ubutil(CMakePackage):
 
     def url_for_version(self, version):
         return f"https://github.com/uboone/ubutil/archive/refs/tags/v{str(version).replace('.', '_')}.tar.gz"
+
+    def setup_run_environment(self, env):
+        print("Setting up ubutil run environment.", file=sys.stderr)
+
+        env.prepend_path("PATH", os.path.join(self.prefix, "bin"))
+        env.prepend_path("PYTHONPATH", os.path.join(self.prefix, "bin"))
+        env.prepend_path("PYTHONPATH", os.path.join(self.prefix, "python"))
+        env.prepend_path("PYTHONPATH", os.path.join(self.prefix, "lib"))
+        env.set("JOBSUB_GROUP", "uboone")
+        env.set("GROUP", "uboone")
+        env.set("SAM_EXPERIMENT", "uboone")
