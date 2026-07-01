@@ -1,7 +1,6 @@
+import sys, os
 from spack_repo.builtin.build_systems.cmake import CMakePackage
-
 from spack.package import *
-
 from spack_repo.fnal_art.packages.fnal_github_package.package import *
 
 class Ubobj(CMakePackage, FnalGithubPackage):
@@ -47,15 +46,8 @@ class Ubobj(CMakePackage, FnalGithubPackage):
         ] 
         return args
 
-
-    variant(
-        "cxxstd",
-        default="17",
-        values=("14", "17", "20"),
-        multi=False,
-        description="Use the specified C++ standard when building.",
-    )
-
-
     def url_for_version(self, version):
         return f"https://github.com/uboone/ubobj/archive/refs/tags/v{str(version).replace('.', '_')}.tar.gz"
+
+    def setup_run_environment(self, env):
+        print("Setting up ubobj run environment.", file=sys.stderr)
