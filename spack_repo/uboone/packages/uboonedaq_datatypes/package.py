@@ -34,8 +34,12 @@ class UboonedaqDatatypes(CMakePackage, FnalGithubPackage):
 
 
     def patch(self):
-        filter_file("find_package\(OpenMP REQUIRED\)"
+        filter_file("find_package\(OpenMP REQUIRED\)",
                 "find_package(OpenMP REQUIRED EXPORT)",
+                "CMakeLists.txt"
+                )
+        filter_file("ArtMake",
+                "CetMake",
                 "CMakeLists.txt"
                 )
 
