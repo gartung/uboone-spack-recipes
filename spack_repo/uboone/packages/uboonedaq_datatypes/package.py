@@ -17,8 +17,6 @@ class UboonedaqDatatypes(CMakePackage, FnalGithubPackage):
 
     depends_on("cmake", type="build")
     depends_on("cetmodules", type="build")
-    depends_on("nufinder", type="build")
-    depends_on("larfinder", type="build")
     depends_on("c", type="build")
     depends_on("cxx", type="build")
     depends_on("boost", type=("build", "link", "run"))
@@ -47,8 +45,6 @@ class UboonedaqDatatypes(CMakePackage, FnalGithubPackage):
     def cmake_args(self):
         args = [
             self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
-            self.define("CMAKE_MODULE_PATH", "%s/Modules;%s/Modules" %
-                       (self.spec['nufinder'].prefix, self.spec['larfinder'].prefix)),
         ] 
         return args
 
